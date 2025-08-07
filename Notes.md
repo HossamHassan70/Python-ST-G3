@@ -56,3 +56,19 @@
 8. Github GUI (VSCode, GitHub Desktop)
 
 ---
+
+# JavaScript 
+
+1. Intoduction & History
+2. Variables
+3. var, let , const
+4. scoping
+5. Hoisting
+6. Operators (Arithmetic, Comparison, Assignment, Logical)
+7. Operators (Unary, Binary, Ternary)
+8. Conditional Statements (if , if..else if , if .. else, switch/case)
+9. Dialogue Boxes (Prompt, Confirm)
+10. Functions
+11. Errors (Syntax, HTML, Runtime, Logical)
+
+---
