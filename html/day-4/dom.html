@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom</title>
+</head>
+<body>
+    <p id="p1">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+    <h2 id="h2">This is h2 </h2>
+    <p>Lorem ipsum dolor sit amet.</p>
+    <p>Lorem ipsum dolor sit amet. again</p>
+    <ul>
+        <li>Lorem, ipsum.1</li>
+        <li>Lorem, ipsum.2</li>
+        <li>Lorem, ipsum.3</li>
+        <li>Lorem, ipsum.4</li>
+    </ul>
+    <ol>
+        <li>Lorem, ipsum dolor.1</li>
+        <li>Lorem, ipsum dolor.2</li>
+        <li>Lorem, ipsum dolor.3</li>
+        <li style="color: aqua;">Lorem, ipsum dolor.4</li>
+    </ol>
+    <script>
+        // console.log(document)
+        /* document.bgColor = '#ff0fef'
+        document.fgColor = '#ff0'
+        document.title = 'My Dom Title'*/
+        console.log(document.getElementById('p1'))
+        let para1 = document.getElementById('p1')
+        para1.innerText = 'Hello with new text'
+        console.log(document.querySelector('ul'))
+        var ul = document.querySelector('ul')
+        ul.id = 'unorderedList'
+        console.log(document.getElementsByTagName('li'))
+        let li1 = document.getElementsByTagName('li')[0]
+        let li2 = document.getElementsByTagName('li')[1]
+        li1.textContent = 'Changed content'
+        li2.style.color = '#f0d'
+
+        var h2 = document.getElementById('h2')
+        console.log(h2.innerHTML)
+        console.log(h2.innerText)
+        console.log(h2.textContent)
+        // console.log(ul.innerText)
+        li2.setAttribute('class', 'c1')
+        // Create Element
+        var el = document.createElement('button')
+        var myDiv = document.createElement('div')
+        var myH1 = document.createElement('h1')
+        document.body.appendChild(myDiv)
+        var myText = document.createTextNode('This is my created Text')
+        myH1.appendChild(myText)
+        myDiv.appendChild(myH1)
+        
+    </script>
+</body>
+</html>

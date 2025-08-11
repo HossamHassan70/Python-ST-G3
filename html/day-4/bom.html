@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>BOM</title>
+    </head>
+    <body>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt, veritatis.</p>
+        <button onclick="openWin()">Open "myWindow"</button>
+        <button onclick="closeWin()">Close "myWindow"</button> 
+        <button onclick="foo()">Alert Selection</button> 
+        <button onclick="stopTime()">Stop Timeout</button>
+        <button onclick="stopInterval()">Stop Interval</button>
+        <p id="demo"></p>
+
+    <script>
+        let myWindow;
+        // window.console.log('Hello')
+        // window.document.writeln('Hello')
+        function openWin() {
+            myWindow = window.open("./index.html", "", "left=200, top=200,width=500,height=300");
+        }
+
+        function closeWin() {
+            myWindow.close();
+        }
+
+            function foo() {
+            const selObj = window.getSelection();
+            alert(selObj);
+            const selRange = selObj.getRangeAt(0);
+            // do stuff with the range
+            }
+            function sayHello(){
+                console.log('Hello User')
+            }
+            var mySetTime = setTimeout(sayHello,5000)
+            function stopTime(){
+                clearTimeout(mySetTime)
+            }
+
+            const element = document.getElementById("demo");
+            var myInterval = setInterval(function() {element.innerHTML += "Hello<br>"}, 2000);
+            function stopInterval(){
+                clearInterval(myInterval) 
+            }
+
+    </script>       
+        <script src="../../js/Bom.js"></script>
+    </body>
+</html>

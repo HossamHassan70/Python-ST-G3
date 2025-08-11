@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+</head>
+<body>
+    <p onclick="alert('You Clicked Me!')">Lorem ipsum dolor sit.</p>
+    <span onmouseover="hoverHandler()">This is a span</span>
+    <div onmouseout="console.log('Mouse Out!')">
+        Lorem ipsum dolor sit amet consectetur.
+    </div>
+    <button id="btn">Click!</button>
+    <h2 id="head2">h</h2>
+    <div>
+    <label for="sample">Focus the input and type something:</label>
+    <input type="text" name="text" id="sample" />
+    </div>
+    <p id="log"></p>
+    <div id="myDIV">This orange element has an onmousemove event handler that displays a random number when you move the mouse inside.
+    <p>Click "Remove" to remove the event handler.</p>
+    <button onclick="removeHandler()">Remove</button>
+    </div>
+
+    <p id="demo"></p>
+    <script src="../../js/Events.js"></script>
+</body>
+</html>
