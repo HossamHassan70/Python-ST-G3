@@ -1,0 +1,19 @@
+.h-center {
+    color: red;
+    background-color: #eee;
+    text-align: center;
+}
+
+.section-head {
+    background-color: brown;
+    font-family: monospace;
+    color: aliceblue;
+}
+
+.mystyle {
+    text-align: center;
+    color: #efefef;
+    background-color: chocolate;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: bold;
+}

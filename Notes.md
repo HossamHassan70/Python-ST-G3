@@ -57,7 +57,7 @@
 
 ---
 
-# JavaScript 
+# JavaScript
 
 1. Intoduction & History
 2. Variables
@@ -70,5 +70,7 @@
 9. Dialogue Boxes (Prompt, Confirm)
 10. Functions
 11. Errors (Syntax, HTML, Runtime, Logical)
+12. Built-in Objects (String, Number, Array, Math, Date, RegExp, Error)
+13. 
 
 ---
