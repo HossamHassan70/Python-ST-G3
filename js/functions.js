@@ -59,3 +59,58 @@
 
 // Arrow Function
 // let myFunction = (a, b) => a * b;
+
+// 1. No parameters No return
+// function sum(){
+//     var num1 = parseInt(prompt('Enter Number 1: '))
+//     var num2 = parseInt(prompt('Enter Number 2: '))
+//     var res = num1 + num2
+//     document.write(res)
+// }
+
+// sum()
+
+// 2. Parameters No return
+// function sum(basmala,b) {
+//     var res = parseInt(basmala) + parseInt(b)
+//     document.write(res)
+// }
+
+// sum(prompt('Enter the First Number: '),prompt('Enter the Second Number: '))
+// var str1 = 'Basmala'
+// var str2 = 'Ahmed'
+
+// console.log(str1 +' '+ str2)
+// var x = 10
+// var y = 5 
+// document.write('<br>')
+// sum(4,5)
+// document.write('<br>')
+// sum(x,y)
+// document.write('<br>')
+// sum('5','7') //12
+// var num1 = parseInt(prompt('Enter Number 1: '))
+// var num2 = parseInt(prompt('Enter Number 2: '))
+// document.write('<br>')
+// sum(num1,num2)
+
+// 3. No parameters return
+// function sum(){
+//     var num1 = parseInt(prompt('Enter Number 1: '))
+//     var num2 = parseInt(prompt('Enter Number 2: '))
+//     var res = num1 + num2
+//     return res
+// }
+
+// document.write(prompt('Enter Your Name: '))
+
+// console.log(sum())
+
+// function sum(x,y) {
+//     return parseInt(x) + parseInt(y)
+// }
+
+// let num1 = 7
+// let num2 = 5
+// console.log(sum(4,5))
+// console.log(sum(num1,num2))
