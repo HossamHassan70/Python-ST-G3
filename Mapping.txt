@@ -1,0 +1,32 @@
+Mapping steps / # => PK , * => FK
+---------------------------------
+Step 1: Mapping of Regular Entity Types -> Table
+    Emp(#SSN, Name, Address, Gender, Salary, B.D, *D_Number, *Sup_SSN)
+    Dep(#D_Number, Name, *M_SSN)
+    Project(#P_Number, Name, Location, *D_Number)
+
+Step 2: Mapping of Weak Entity Types -> Table
+    Dependents(#*SSN, #F_Name, Gender, B.D)
+
+-- Relations -- 
+Step 3: Mapping of Binary / Unary 1:N Relationship Types.
+    -> Pk from 1-side => FK into M-side 
+
+Step 4: Mapping of Binary M:N Relationship Types. 
+    Work_on(#*SSN, #*P_Number, Num_of_hours)
+
+Step 5: Mapping of Binary 1:1 Relation Types
+    - may (partial) -> must (total) 
+        (pk) may (partial) => (fk) must (total)
+    - may (partial) -> may (partial)
+                (pk) => (fk)
+                (fk) <= (pk)
+                new table (*pk1,*pk2)
+    - must (total) -> must (total)
+        merge two tables
+
+Step 6: Mapping of Multi-valued attributes.
+    Location(#*D_Number, #Location)
+
+Step 7: Mapping of Ternary Relationship Types.
+    new table (*pk1, *pk2, *pk3)
