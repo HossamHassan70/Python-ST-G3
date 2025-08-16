@@ -1,0 +1,906 @@
+Server [localhost]:
+Database [postgres]:
+Port [5432]:
+Username [postgres]:
+Password for user postgres:
+
+psql (17.5)
+WARNING: Console code page (437) differs from Windows code page (1252)
+         8-bit characters might not work correctly. See psql reference
+         page "Notes for Windows users" for details.
+Type "help" for help.
+
+postgres=# select version();
+                                 version
+-------------------------------------------------------------------------
+ PostgreSQL 17.5 on x86_64-windows, compiled by msvc-19.44.35209, 64-bit
+(1 row)
+
+
+postgres=# show search_path;
+   search_path
+-----------------
+ "$user", public
+(1 row)
+
+
+postgres=# \c track_python;
+You are now connected to database "track_python" as user "postgres".
+track_python=# show search_path;
+   search_path
+-----------------
+ "$user", public
+(1 row)
+
+
+track_python=# set search_path = myschema;
+SET
+track_python=# show search_path;
+ search_path
+-------------
+ myschema
+(1 row)
+
+
+track_python=# set search_path to myschema, newone,public;
+SET
+track_python=# show search_path;
+       search_path
+--------------------------
+ myschema, newone, public
+(1 row)
+
+
+track_python=# create table student (
+track_python(#
+track_python(# ;
+track_python(# ')
+track_python'# ;
+track_python'# ';
+track_python(# );
+ERROR:  syntax error at or near ";"
+LINE 2: ;
+        ^
+track_python=# create table emp(
+track_python(# ssn int primary key,
+track_python(# name varchar(60),
+track_python(# address varchar(100),
+track_python(# gender varchar(10),
+track_python(# salary money,
+track_python(# birth_date date,
+track_python(# )
+track_python-# ;
+ERROR:  syntax error at or near ")"
+LINE 8: )
+        ^
+track_python=# create table emp(
+track_python(# ssn int primary key,
+track_python(# name varchar(60),
+track_python(# address varchar(100),
+track_python(# gender varchar(10),
+track_python(# salary money,
+track_python(# birth_date date);
+CREATE TABLE
+track_python=# \l
+                                                                      List of databases
+     Name     |  Owner   | Encoding | Locale Provider |          Collate           |           Ctype            | Locale | ICU Rules |   Access privileges
+--------------+----------+----------+-----------------+----------------------------+----------------------------+--------+-----------+-----------------------
+ new_py       | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           |
+ postgres     | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           |
+ py           | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           |
+ student      | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           |
+ template0    | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           | =c/postgres          +
+              |          |          |                 |                            |                            |        |           | postgres=CTc/postgres
+ template1    | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           | =c/postgres          +
+              |          |          |                 |                            |                            |        |           | postgres=CTc/postgres
+ track_python | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           |
+(7 rows)
+
+
+track_python=# \d
+         List of relations
+  Schema  | Name | Type  |  Owner
+----------+------+-------+----------
+ myschema | emp  | table | postgres
+(1 row)
+
+
+track_python=# \d emp
+                         Table "myschema.emp"
+   Column   |          Type          | Collation | Nullable | Default
+------------+------------------------+-----------+----------+---------
+ ssn        | integer                |           | not null |
+ name       | character varying(60)  |           |          |
+ address    | character varying(100) |           |          |
+ gender     | character varying(10)  |           |          |
+ salary     | money                  |           |          |
+ birth_date | date                   |           |          |
+Indexes:
+    "emp_pkey" PRIMARY KEY, btree (ssn)
+
+
+track_python=# select * from emp;
+ ssn | name | address | gender | salary | birth_date
+-----+------+---------+--------+--------+------------
+(0 rows)
+
+
+track_python=# \l
+                                                                      List of databases
+     Name     |  Owner   | Encoding | Locale Provider |          Collate           |           Ctype            | Locale | ICU Rules |   Access privileges
+--------------+----------+----------+-----------------+----------------------------+----------------------------+--------+-----------+-----------------------
+ new_py       | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           |
+ postgres     | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           |
+ student      | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           |
+ template0    | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           | =c/postgres          +
+              |          |          |                 |                            |                            |        |           | postgres=CTc/postgres
+ template1    | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           | =c/postgres          +
+              |          |          |                 |                            |                            |        |           | postgres=CTc/postgres
+ track_python | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           |
+(6 rows)
+
+
+track_python=# create database py_track;
+CREATE DATABASE
+track_python=# \c py_track
+You are now connected to database "py_track" as user "postgres".
+py_track=# \l
+                                                                      List of databases
+     Name     |  Owner   | Encoding | Locale Provider |          Collate           |           Ctype            | Locale | ICU Rules |   Access privileges
+--------------+----------+----------+-----------------+----------------------------+----------------------------+--------+-----------+-----------------------
+ new_py       | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           |
+ postgres     | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           |
+ py_track     | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           |
+ student      | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           |
+ template0    | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           | =c/postgres          +
+              |          |          |                 |                            |                            |        |           | postgres=CTc/postgres
+ template1    | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           | =c/postgres          +
+              |          |          |                 |                            |                            |        |           | postgres=CTc/postgres
+ track_python | postgres | UTF8     | libc            | English_United States.1252 | English_United States.1252 |        |           |
+(7 rows)
+
+
+py_track=# \help
+Available help:
+  ABORT                            CREATE USER MAPPING
+  ALTER AGGREGATE                  CREATE VIEW
+  ALTER COLLATION                  DEALLOCATE
+  ALTER CONVERSION                 DECLARE
+  ALTER DATABASE                   DELETE
+  ALTER DEFAULT PRIVILEGES         DISCARD
+  ALTER DOMAIN                     DO
+  ALTER EVENT TRIGGER              DROP ACCESS METHOD
+  ALTER EXTENSION                  DROP AGGREGATE
+  ALTER FOREIGN DATA WRAPPER       DROP CAST
+  ALTER FOREIGN TABLE              DROP COLLATION
+  ALTER FUNCTION                   DROP CONVERSION
+  ALTER GROUP                      DROP DATABASE
+  ALTER INDEX                      DROP DOMAIN
+  ALTER LANGUAGE                   DROP EVENT TRIGGER
+  ALTER LARGE OBJECT               DROP EXTENSION
+  ALTER MATERIALIZED VIEW          DROP FOREIGN DATA WRAPPER
+  ALTER OPERATOR                   DROP FOREIGN TABLE
+  ALTER OPERATOR CLASS             DROP FUNCTION
+  ALTER OPERATOR FAMILY            DROP GROUP
+  ALTER POLICY                     DROP INDEX
+  ALTER PROCEDURE                  DROP LANGUAGE
+  ALTER PUBLICATION                DROP MATERIALIZED VIEW
+  ALTER ROLE                       DROP OPERATOR
+  ALTER ROUTINE                    DROP OPERATOR CLASS
+  ALTER RULE                       DROP OPERATOR FAMILY
+  ALTER SCHEMA                     DROP OWNED
+  ALTER SEQUENCE                   DROP POLICY
+  ALTER SERVER                     DROP PROCEDURE
+  ALTER STATISTICS                 DROP PUBLICATION
+  ALTER SUBSCRIPTION               DROP ROLE
+  ALTER SYSTEM                     DROP ROUTINE
+  ALTER TABLE                      DROP RULE
+  ALTER TABLESPACE                 DROP SCHEMA
+  ALTER TEXT SEARCH CONFIGURATION  DROP SEQUENCE
+  ALTER TEXT SEARCH DICTIONARY     DROP SERVER
+  ALTER TEXT SEARCH PARSER         DROP STATISTICS
+  ALTER TEXT SEARCH TEMPLATE       DROP SUBSCRIPTION
+  ALTER TRIGGER                    DROP TABLE
+  ALTER TYPE                       DROP TABLESPACE
+  ALTER USER                       DROP TEXT SEARCH CONFIGURATION
+  ALTER USER MAPPING               DROP TEXT SEARCH DICTIONARY
+  ALTER VIEW                       DROP TEXT SEARCH PARSER
+  ANALYZE                          DROP TEXT SEARCH TEMPLATE
+  BEGIN                            DROP TRANSFORM
+  CALL                             DROP TRIGGER
+  CHECKPOINT                       DROP TYPE
+  CLOSE                            DROP USER
+  CLUSTER                          DROP USER MAPPING
+  COMMENT                          DROP VIEW
+  COMMIT                           END
+  COMMIT PREPARED                  EXECUTE
+  COPY                             EXPLAIN
+  CREATE ACCESS METHOD             FETCH
+  CREATE AGGREGATE                 GRANT
+  CREATE CAST                      IMPORT FOREIGN SCHEMA
+  CREATE COLLATION                 INSERT
+  CREATE CONVERSION                LISTEN
+  CREATE DATABASE                  LOAD
+  CREATE DOMAIN                    LOCK
+  CREATE EVENT TRIGGER             MERGE
+  CREATE EXTENSION                 MOVE
+  CREATE FOREIGN DATA WRAPPER      NOTIFY
+  CREATE FOREIGN TABLE             PREPARE
+  CREATE FUNCTION                  PREPARE TRANSACTION
+  CREATE GROUP                     REASSIGN OWNED
+  CREATE INDEX                     REFRESH MATERIALIZED VIEW
+  CREATE LANGUAGE                  REINDEX
+  CREATE MATERIALIZED VIEW         RELEASE SAVEPOINT
+  CREATE OPERATOR                  RESET
+  CREATE OPERATOR CLASS            REVOKE
+  CREATE OPERATOR FAMILY           ROLLBACK
+  CREATE POLICY                    ROLLBACK PREPARED
+  CREATE PROCEDURE                 ROLLBACK TO SAVEPOINT
+  CREATE PUBLICATION               SAVEPOINT
+  CREATE ROLE                      SECURITY LABEL
+  CREATE RULE                      SELECT
+  CREATE SCHEMA                    SELECT INTO
+  CREATE SEQUENCE                  SET
+  CREATE SERVER                    SET CONSTRAINTS
+  CREATE STATISTICS                SET ROLE
+  CREATE SUBSCRIPTION              SET SESSION AUTHORIZATION
+  CREATE TABLE                     SET TRANSACTION
+  CREATE TABLE AS                  SHOW
+  CREATE TABLESPACE                START TRANSACTION
+  CREATE TEXT SEARCH CONFIGURATION TABLE
+  CREATE TEXT SEARCH DICTIONARY    TRUNCATE
+  CREATE TEXT SEARCH PARSER        UNLISTEN
+  CREATE TEXT SEARCH TEMPLATE      UPDATE
+  CREATE TRANSFORM                 VACUUM
+  CREATE TRIGGER                   VALUES
+  CREATE TYPE                      WITH
+  CREATE USER
+
+py_track=#
+py_track=#
+py_track=#
+py_track=#
+py_track=#
+py_track=#
+py_track=#
+py_track=#
+py_track=#
+py_track=#
+py_track=#
+py_track=#
+py_track=#
+py_track=# show search_path;
+   search_path
+-----------------
+ "$user", public
+(1 row)
+
+
+py_track=# create schema myschema;
+CREATE SCHEMA
+py_track=# show search_path;
+   search_path
+-----------------
+ "$user", public
+(1 row)
+
+
+py_track=# set search_path to myschema, public;
+SET
+py_track=# show search_path;
+   search_path
+------------------
+ myschema, public
+(1 row)
+
+
+py_track=# create table emp(
+py_track(# ssn int primary key,
+py_track(# name varchar(60),
+py_track(# address varchar(100),
+py_track(# gender varchar(10),
+py_track(# salary money,
+py_track(# birth_date date);
+CREATE TABLE
+py_track=# \d
+         List of relations
+  Schema  | Name | Type  |  Owner
+----------+------+-------+----------
+ myschema | emp  | table | postgres
+(1 row)
+
+
+py_track=# \d emp
+                         Table "myschema.emp"
+   Column   |          Type          | Collation | Nullable | Default
+------------+------------------------+-----------+----------+---------
+ ssn        | integer                |           | not null |
+ name       | character varying(60)  |           |          |
+ address    | character varying(100) |           |          |
+ gender     | character varying(10)  |           |          |
+ salary     | money                  |           |          |
+ birth_date | date                   |           |          |
+Indexes:
+    "emp_pkey" PRIMARY KEY, btree (ssn)
+
+
+py_track=# create table dep (
+py_track(# d_num int primary key,
+py_track(# name varchar(30) not null,
+py_track(# m_ssn int FOREIGN KEY m_fk
+py_track(# REFERENCES emp(ssn)
+py_track(# );
+ERROR:  syntax error at or near "FOREIGN"
+LINE 4: m_ssn int FOREIGN KEY m_fk
+                  ^
+py_track=# create table dep (
+py_track(# d_num int primary key,
+py_track(# name varchar(30) not null,
+py_track(# m_ssn int,
+py_track(# CONSTRAINT m_fk FOREIGN KEY
+py_track(# (m_ssn) REFERENCES emp(ssn)
+py_track(# );
+CREATE TABLE
+py_track=# \d dep
+                      Table "myschema.dep"
+ Column |         Type          | Collation | Nullable | Default
+--------+-----------------------+-----------+----------+---------
+ d_num  | integer               |           | not null |
+ name   | character varying(30) |           | not null |
+ m_ssn  | integer               |           |          |
+Indexes:
+    "dep_pkey" PRIMARY KEY, btree (d_num)
+Foreign-key constraints:
+    "m_fk" FOREIGN KEY (m_ssn) REFERENCES emp(ssn)
+
+
+py_track=# select * from dep;
+ d_num | name | m_ssn
+-------+------+-------
+(0 rows)
+
+
+py_track=# create table project (
+py_track(# p
+py_track(# );;
+ERROR:  syntax error at or near ";"
+LINE 3: );
+         ^
+py_track=# create table project (
+py_track(# p_num int,
+py_track(# name varchar(30),
+py_track(# location varchar(100),
+py_track(# CONSTRAINT
+py_track(# primary key (p_num),
+py_track(# dep_fk FOREIGN KEY (d_num)
+py_track(# REFERENCES dep(d_num)
+py_track(# );
+ERROR:  syntax error at or near "primary"
+LINE 6: primary key (p_num),
+        ^
+py_track=# create table project (
+py_track(# p_num int,
+py_track(# name varchar(30),
+py_track(# location varchar(100),
+py_track(# primary key (p_num),
+py_track(# CONSTRAINT
+py_track(# dep_fk FOREIGN KEY (d_num)
+py_track(# REFERENCES dep(d_num)
+py_track(# );
+ERROR:  column "d_num" referenced in foreign key constraint does not exist
+py_track=# select * from dep;
+ d_num | name | m_ssn
+-------+------+-------
+(0 rows)
+
+
+py_track=# select * from public.test;
+ id | name
+----+------
+(0 rows)
+
+
+py_track=# show search_path;
+   search_path
+------------------
+ myschema, public
+(1 row)
+
+
+py_track=# create table project (
+py_track(# p_num int,
+py_track(# name varchar(30),
+py_track(# location varchar(100),
+py_track(# d_num int,
+py_track(# primary key (p_num),
+py_track(# CONSTRAINT
+py_track(# dep_fk FOREIGN KEY (d_num)
+py_track(# REFERENCES dep(d_num)
+py_track(# );
+CREATE TABLE
+py_track=# \d project;
+                      Table "myschema.project"
+  Column  |          Type          | Collation | Nullable | Default
+----------+------------------------+-----------+----------+---------
+ p_num    | integer                |           | not null |
+ name     | character varying(30)  |           |          |
+ location | character varying(100) |           |          |
+ d_num    | integer                |           |          |
+Indexes:
+    "project_pkey" PRIMARY KEY, btree (p_num)
+Foreign-key constraints:
+    "dep_fk" FOREIGN KEY (d_num) REFERENCES dep(d_num)
+
+
+py_track=# select * from emp;
+ ssn | name | address | gender | salary | birth_date
+-----+------+---------+--------+--------+------------
+(0 rows)
+
+
+py_track=# alter table emp
+py_track-# add constraint d_num_fk
+py_track-# foreign key(d_number)
+py_track-# references dep(d_num);
+ERROR:  column "d_number" referenced in foreign key constraint does not exist
+py_track=# alter table emp
+py_track-# add column d_number int;
+ALTER TABLE
+py_track=# alter table emp
+py_track-# add constraint d_num_fk
+py_track-# foreign key(d_number)
+py_track-# references dep(d_num);
+ALTER TABLE
+py_track=# select * from emp;
+ ssn | name | address | gender | salary | birth_date | d_number
+-----+------+---------+--------+--------+------------+----------
+(0 rows)
+
+
+py_track=# \d emp
+                         Table "myschema.emp"
+   Column   |          Type          | Collation | Nullable | Default
+------------+------------------------+-----------+----------+---------
+ ssn        | integer                |           | not null |
+ name       | character varying(60)  |           |          |
+ address    | character varying(100) |           |          |
+ gender     | character varying(10)  |           |          |
+ salary     | money                  |           |          |
+ birth_date | date                   |           |          |
+ d_number   | integer                |           |          |
+Indexes:
+    "emp_pkey" PRIMARY KEY, btree (ssn)
+Foreign-key constraints:
+    "d_num_fk" FOREIGN KEY (d_number) REFERENCES dep(d_num)
+Referenced by:
+    TABLE "dep" CONSTRAINT "m_fk" FOREIGN KEY (m_ssn) REFERENCES emp(ssn)
+
+
+py_track=# alter table emp
+py_track-# add coulmn sup_ssn int;
+ERROR:  syntax error at or near "int"
+LINE 2: add coulmn sup_ssn int;
+                           ^
+py_track=# alter table emp
+py_track-# add column sup_ssn int;
+ALTER TABLE
+py_track=# alter table emp
+py_track-# add constraint sup_ssn_fk
+py_track-# foreign key(sup_ssn)
+py_track-# references emp(ssn);
+ALTER TABLE
+py_track=# \d emp
+                         Table "myschema.emp"
+   Column   |          Type          | Collation | Nullable | Default
+------------+------------------------+-----------+----------+---------
+ ssn        | integer                |           | not null |
+ name       | character varying(60)  |           |          |
+ address    | character varying(100) |           |          |
+ gender     | character varying(10)  |           |          |
+ salary     | money                  |           |          |
+ birth_date | date                   |           |          |
+ d_number   | integer                |           |          |
+ sup_ssn    | integer                |           |          |
+Indexes:
+    "emp_pkey" PRIMARY KEY, btree (ssn)
+Foreign-key constraints:
+    "d_num_fk" FOREIGN KEY (d_number) REFERENCES dep(d_num)
+    "sup_ssn_fk" FOREIGN KEY (sup_ssn) REFERENCES emp(ssn)
+Referenced by:
+    TABLE "dep" CONSTRAINT "m_fk" FOREIGN KEY (m_ssn) REFERENCES emp(ssn)
+    TABLE "emp" CONSTRAINT "sup_ssn_fk" FOREIGN KEY (sup_ssn) REFERENCES emp(ssn)
+
+
+py_track=# insert into emp
+py_track-# values
+py_track-# (1,'Basmala Ahmed',
+py_track(# 'Alex', 'Female',
+py_track(# 10000.05,'2005-11-22');
+INSERT 0 1
+py_track=# select * from emp;
+ ssn |     name      | address | gender |   salary   | birth_date | d_number | sup_ssn
+-----+---------------+---------+--------+------------+------------+----------+---------
+   1 | Basmala Ahmed | Alex    | Female | $10,000.05 | 2005-11-22 |          |
+(1 row)
+
+
+py_track=# \d dep
+                      Table "myschema.dep"
+ Column |         Type          | Collation | Nullable | Default
+--------+-----------------------+-----------+----------+---------
+ d_num  | integer               |           | not null |
+ name   | character varying(30) |           | not null |
+ m_ssn  | integer               |           |          |
+Indexes:
+    "dep_pkey" PRIMARY KEY, btree (d_num)
+Foreign-key constraints:
+    "m_fk" FOREIGN KEY (m_ssn) REFERENCES emp(ssn)
+Referenced by:
+    TABLE "emp" CONSTRAINT "d_num_fk" FOREIGN KEY (d_number) REFERENCES dep(d_num)
+    TABLE "project" CONSTRAINT "dep_fk" FOREIGN KEY (d_num) REFERENCES dep(d_num)
+
+
+py_track=# insert into dep (d_num, name)
+py_track-# values (100, 'python',
+py_track(# 200,'os',
+py_track(# 300, 'java',
+py_track(# 400, '.net')
+py_track-# ;
+ERROR:  INSERT has more expressions than target columns
+LINE 3: 200,'os',
+        ^
+py_track=# insert into dep (d_num)
+py_track-# values
+py_track-# (100,200,300,400);
+ERROR:  INSERT has more expressions than target columns
+LINE 3: (100,200,300,400);
+             ^
+py_track=# insert into dep (d_num,name,m_ssn)
+py_track-# values
+py_track-# (100,'python',1);
+INSERT 0 1
+py_track=# select * from dep;
+ d_num |  name  | m_ssn
+-------+--------+-------
+   100 | python |     1
+(1 row)
+
+
+py_track=# insert into dep (d_num,name)
+py_track-# values
+py_track-# (200,'os');
+INSERT 0 1
+py_track=# select * from dep;
+ d_num |  name  | m_ssn
+-------+--------+-------
+   100 | python |     1
+   200 | os     |
+(2 rows)
+
+
+py_track=# insert into dep (d_num,name)
+py_track-# values
+py_track-# (300,'java'),
+py_track-# (400,'.net');
+INSERT 0 2
+py_track=# select * dep;
+ERROR:  syntax error at or near "dep"
+LINE 1: select * dep;
+                 ^
+py_track=# select * from dep;
+ d_num |  name  | m_ssn
+-------+--------+-------
+   100 | python |     1
+   200 | os     |
+   300 | java   |
+   400 | .net   |
+(4 rows)
+
+
+py_track=# select * from emp;
+ ssn |     name      | address | gender |   salary   | birth_date | d_number | sup_ssn
+-----+---------------+---------+--------+------------+------------+----------+---------
+   1 | Basmala Ahmed | Alex    | Female | $10,000.05 | 2005-11-22 |          |
+(1 row)
+
+
+py_track=# update emp
+py_track-# set d_number = 500
+py_track-# where ssn = 1;
+ERROR:  insert or update on table "emp" violates foreign key constraint "d_num_fk"
+DETAIL:  Key (d_number)=(500) is not present in table "dep".
+py_track=# update emp
+py_track-# set d_number = 100
+py_track-# where ssn = 1;
+UPDATE 1
+py_track=# select * from emp;
+ ssn |     name      | address | gender |   salary   | birth_date | d_number | sup_ssn
+-----+---------------+---------+--------+------------+------------+----------+---------
+   1 | Basmala Ahmed | Alex    | Female | $10,000.05 | 2005-11-22 |      100 |
+(1 row)
+
+
+py_track=# insert into emp (name, ssn, gender, address, salary, birth_date, d_number)
+py_track-# values
+py_track-# ('Omnia', 2, 'Female', 'Elminya', 5000.50, '2005-11-21', 200),
+py_track-# ('Mohamed Alaa' 3, 'Male', 'Elminya', 15000.15, '2005-04-19', 100),
+py_track-# ('Moahmed Mondi', 4, 'Male', 'Elminya City', 1500.70, '2006-07-07', 300),
+py_track-# ('Mayar Mamdouh', 5, 'Female', 'Assuit', 20000.05, '2004-03-20' 100);
+ERROR:  syntax error at or near "3"
+LINE 4: ('Mohamed Alaa' 3, 'Male', 'Elminya', 15000.15, '2005-04-19'...
+                        ^
+py_track=# insert into emp (name, ssn, gender, address, salary, birth_date, d_number)
+py_track-# values
+py_track-# ('Omnia', 2, 'Female', 'Elminya', 5000.50, '2005-11-21', 200),
+py_track-# ('Mohamed Alaa', 3, 'Male', 'Elminya', 15000.15, '2004-04-19', 100),
+py_track-# ('Moahmed Mondi', 4, 'Male', 'Elminya City', 1500.70, '2006-07-07', 300),
+py_track-# ('Mayar Mamdouh', 5, 'Female', 'Assuit', 20000.05, '2004-03-20', 100);
+INSERT 0 4
+py_track=# select * from emp;
+ ssn |     name      |   address    | gender |   salary   | birth_date | d_number | sup_ssn
+-----+---------------+--------------+--------+------------+------------+----------+---------
+   1 | Basmala Ahmed | Alex         | Female | $10,000.05 | 2005-11-22 |      100 |
+   2 | Omnia         | Elminya      | Female |  $5,000.50 | 2005-11-21 |      200 |
+   3 | Mohamed Alaa  | Elminya      | Male   | $15,000.15 | 2004-04-19 |      100 |
+   4 | Moahmed Mondi | Elminya City | Male   |  $1,500.70 | 2006-07-07 |      300 |
+   5 | Mayar Mamdouh | Assuit       | Female | $20,000.05 | 2004-03-20 |      100 |
+(5 rows)
+
+
+py_track=# update emp
+py_track-# set name = 'Omnia Nasser'
+py_track-# where ssn = 2;
+UPDATE 1
+py_track=# select * from emp;
+ ssn |     name      |   address    | gender |   salary   | birth_date | d_number | sup_ssn
+-----+---------------+--------------+--------+------------+------------+----------+---------
+   1 | Basmala Ahmed | Alex         | Female | $10,000.05 | 2005-11-22 |      100 |
+   3 | Mohamed Alaa  | Elminya      | Male   | $15,000.15 | 2004-04-19 |      100 |
+   4 | Moahmed Mondi | Elminya City | Male   |  $1,500.70 | 2006-07-07 |      300 |
+   5 | Mayar Mamdouh | Assuit       | Female | $20,000.05 | 2004-03-20 |      100 |
+   2 | Omnia Nasser  | Elminya      | Female |  $5,000.50 | 2005-11-21 |      200 |
+(5 rows)
+
+
+py_track=# update emp
+py_track-# set sup_ssn = 1;
+UPDATE 5
+py_track=# select * from emp;
+ ssn |     name      |   address    | gender |   salary   | birth_date | d_number | sup_ssn
+-----+---------------+--------------+--------+------------+------------+----------+---------
+   1 | Basmala Ahmed | Alex         | Female | $10,000.05 | 2005-11-22 |      100 |       1
+   3 | Mohamed Alaa  | Elminya      | Male   | $15,000.15 | 2004-04-19 |      100 |       1
+   4 | Moahmed Mondi | Elminya City | Male   |  $1,500.70 | 2006-07-07 |      300 |       1
+   5 | Mayar Mamdouh | Assuit       | Female | $20,000.05 | 2004-03-20 |      100 |       1
+   2 | Omnia Nasser  | Elminya      | Female |  $5,000.50 | 2005-11-21 |      200 |       1
+(5 rows)
+
+
+py_track=# select * from dep;
+ d_num |  name  | m_ssn
+-------+--------+-------
+   100 | python |     1
+   200 | os     |
+   300 | java   |
+   400 | .net   |
+(4 rows)
+
+
+py_track=# insert into dep(m_ssn)
+py_track-# values
+py_track-# (4)
+py_track-# where d_num = 200;
+ERROR:  syntax error at or near "where"
+LINE 4: where d_num = 200;
+        ^
+py_track=# update dep
+py_track-# set m_ssn = (
+py_track(# select ssn from emp
+py_track(# where name = 'Mohamed Mondi')
+py_track-# where name = 'os';
+UPDATE 1
+py_track=# select * from dep;
+ d_num |  name  | m_ssn
+-------+--------+-------
+   100 | python |     1
+   300 | java   |
+   400 | .net   |
+   200 | os     |
+(4 rows)
+
+
+py_track=# select ssn from emp
+py_track-# where name = 'Mohamed Mondi';
+ ssn
+-----
+(0 rows)
+
+
+py_track=# update emp
+py_track-# set name = 'Mohamed Mondi'
+py_track-# where ssn = 4;
+UPDATE 1
+py_track=# select ssn from emp
+py_track-# where name = 'Mohamed Mondi';
+ ssn
+-----
+   4
+(1 row)
+
+
+py_track=# update dep
+py_track-# set m_ssn = (
+py_track(# select ssn from emp
+py_track(# where name = 'Mohamed Mondi')
+py_track-# where name = 'os';
+UPDATE 1
+py_track=# select * from dep;
+ d_num |  name  | m_ssn
+-------+--------+-------
+   100 | python |     1
+   300 | java   |
+   400 | .net   |
+   200 | os     |     4
+(4 rows)
+
+
+py_track=# select * from emp;
+ ssn |     name      |   address    | gender |   salary   | birth_date | d_number | sup_ssn
+-----+---------------+--------------+--------+------------+------------+----------+---------
+   1 | Basmala Ahmed | Alex         | Female | $10,000.05 | 2005-11-22 |      100 |       1
+   3 | Mohamed Alaa  | Elminya      | Male   | $15,000.15 | 2004-04-19 |      100 |       1
+   5 | Mayar Mamdouh | Assuit       | Female | $20,000.05 | 2004-03-20 |      100 |       1
+   2 | Omnia Nasser  | Elminya      | Female |  $5,000.50 | 2005-11-21 |      200 |       1
+   4 | Mohamed Mondi | Elminya City | Male   |  $1,500.70 | 2006-07-07 |      300 |       1
+(5 rows)
+
+
+py_track=# select name, birth_date
+py_track-# from emp
+py_track-# where salary >= 5000;
+ERROR:  operator does not exist: money >= integer
+LINE 3: where salary >= 5000;
+                     ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+py_track=# select name, birth_date
+py_track-# from emp
+py_track-# where salary >= 5000.50;
+ERROR:  operator does not exist: money >= numeric
+LINE 3: where salary >= 5000.50;
+                     ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+py_track=# select name, birth_date
+py_track-# from emp
+py_track-# where ssn >= 3;
+     name      | birth_date
+---------------+------------
+ Mohamed Alaa  | 2004-04-19
+ Mayar Mamdouh | 2004-03-20
+ Mohamed Mondi | 2006-07-07
+(3 rows)
+
+
+py_track=# select name, birth_date
+py_track-# from emp
+py_track-# where salary >= '5000.50'::money;
+     name      | birth_date
+---------------+------------
+ Basmala Ahmed | 2005-11-22
+ Mohamed Alaa  | 2004-04-19
+ Mayar Mamdouh | 2004-03-20
+ Omnia Nasser  | 2005-11-21
+(4 rows)
+
+
+py_track=# where salary >= '$5000.50';
+ERROR:  syntax error at or near "where"
+LINE 1: where salary >= '$5000.50';
+        ^
+py_track=# select name, birth_date
+py_track-# from emp
+py_track-# where salary >= '$5000.50';
+     name      | birth_date
+---------------+------------
+ Basmala Ahmed | 2005-11-22
+ Mohamed Alaa  | 2004-04-19
+ Mayar Mamdouh | 2004-03-20
+ Omnia Nasser  | 2005-11-21
+(4 rows)
+
+
+py_track=# select * from emp;
+ ssn |     name      |   address    | gender |   salary   | birth_date | d_number | sup_ssn
+-----+---------------+--------------+--------+------------+------------+----------+---------
+   1 | Basmala Ahmed | Alex         | Female | $10,000.05 | 2005-11-22 |      100 |       1
+   3 | Mohamed Alaa  | Elminya      | Male   | $15,000.15 | 2004-04-19 |      100 |       1
+   5 | Mayar Mamdouh | Assuit       | Female | $20,000.05 | 2004-03-20 |      100 |       1
+   2 | Omnia Nasser  | Elminya      | Female |  $5,000.50 | 2005-11-21 |      200 |       1
+   4 | Mohamed Mondi | Elminya City | Male   |  $1,500.70 | 2006-07-07 |      300 |       1
+(5 rows)
+
+
+py_track=# select * from dep;
+ d_num |  name  | m_ssn
+-------+--------+-------
+   100 | python |     1
+   300 | java   |
+   400 | .net   |
+   200 | os     |     4
+(4 rows)
+
+
+py_track=# delete from dep
+py_track-# where d_num = 'os';
+ERROR:  invalid input syntax for type integer: "os"
+LINE 2: where d_num = 'os';
+                      ^
+py_track=# delete from dep
+py_track-# where d_num = 200;
+ERROR:  update or delete on table "dep" violates foreign key constraint "d_num_fk" on table "emp"
+DETAIL:  Key (d_num)=(200) is still referenced from table "emp".
+py_track=# select name ,name
+py_track-# from emp
+py_track-# inner join
+py_track-# dep
+py_track-# on emp.d_number = dep.d_num;
+ERROR:  column reference "name" is ambiguous
+LINE 1: select name ,name
+               ^
+py_track=# select name ,name
+py_track-# from emp
+py_track-# full join dep
+py_track-# on emp.d_number = dep.d_num;
+ERROR:  column reference "name" is ambiguous
+LINE 1: select name ,name
+               ^
+py_track=# select id, address ,name
+py_track-# from emp
+py_track-# inner join dep
+py_track-# on emp.d_number = dep.d_num;
+ERROR:  column "id" does not exist
+LINE 1: select id, address ,name
+               ^
+py_track=# select * from emp
+py_track-# join dep
+py_track-# on emp.d_number = dep.d_num;
+ ssn |     name      |   address    | gender |   salary   | birth_date | d_number | sup_ssn | d_num |  name  | m_ssn
+-----+---------------+--------------+--------+------------+------------+----------+---------+-------+--------+-------
+   5 | Mayar Mamdouh | Assuit       | Female | $20,000.05 | 2004-03-20 |      100 |       1 |   100 | python |     1
+   3 | Mohamed Alaa  | Elminya      | Male   | $15,000.15 | 2004-04-19 |      100 |       1 |   100 | python |     1
+   1 | Basmala Ahmed | Alex         | Female | $10,000.05 | 2005-11-22 |      100 |       1 |   100 | python |     1
+   4 | Mohamed Mondi | Elminya City | Male   |  $1,500.70 | 2006-07-07 |      300 |       1 |   300 | java   |
+   2 | Omnia Nasser  | Elminya      | Female |  $5,000.50 | 2005-11-21 |      200 |       1 |   200 | os     |     4
+(5 rows)
+
+
+py_track=# select name ,name
+py_track-# from emp
+py_track-# join dep
+py_track-# on emp.d_number = dep.d_num;
+ERROR:  column reference "name" is ambiguous
+LINE 1: select name ,name
+               ^
+py_track=# select emp.name ,dep.name
+py_track-# from emp
+py_track-# inner join
+py_track-# dep
+py_track-# on emp.d_number = dep.d_num;
+     name      |  name
+---------------+--------
+ Mayar Mamdouh | python
+ Mohamed Alaa  | python
+ Basmala Ahmed | python
+ Mohamed Mondi | java
+ Omnia Nasser  | os
+(5 rows)
+
+
+py_track=# select count(*) as count_of_emp
+py_track-# from emp;
+ count_of_emp
+--------------
+            5
+(1 row)
+
+
+py_track=#
