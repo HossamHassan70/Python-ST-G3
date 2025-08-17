@@ -57,7 +57,7 @@
 
 ---
 
-# JavaScript 
+# JavaScript
 
 1. Intoduction & History
 2. Variables
@@ -70,5 +70,42 @@
 9. Dialogue Boxes (Prompt, Confirm)
 10. Functions
 11. Errors (Syntax, HTML, Runtime, Logical)
+12. Loops (For, while, do..while)
+13. Array, Objects
+14. Built-in Objects with properties and methods
+15. BOM
+16. DOM
+
+---
+
+# Bootstrap
+
+1. Intoduction
+2. How it works
+3. Components
+4. Framework Design
+5. Make a simple design
+
+---
+
+# Database (PostgreSQL)
+
+1. Introduction to Database
+2. Fundementals of Database
+3. ERD explaining
+4. SQL database and NO SQL
+5. Mapping
+6. Postgresql and PgAdmin Installation
+7. DBMS Arch
+8. DDL (grant, revoke)
+9. DCL (create, alter, drop)
+10. DML (select, insert, update, delete)
+11. Aggregation Function
+12. Subqueiry
+13. Join
+
+---
+
+
 
 ---
