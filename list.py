@@ -4,7 +4,11 @@
 # 4. List in Python are Mutable (Modify or Delete items)
 # 5. List in python could contain different datatypes 
 
+l = [1, 2, 3]
+my_l = list([12, 13, 14])
 
+print(l)
+print(my_l)
 my_list = [14, 10, 'Mohamed', True, 10, 'ol', 'ol']
 print(my_list)
 print(my_list[0])
