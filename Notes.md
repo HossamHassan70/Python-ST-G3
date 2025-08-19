@@ -106,6 +106,15 @@
 
 ---
 
+# Python
+
+1. Scopeing (global, local)
+2. Regex
+3. JSON
+4. Errors and Handle it (try, except, else, finally)
+5. How Modules work
+6. Libraries
+7. Files
 
 
 ---
