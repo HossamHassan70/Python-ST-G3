@@ -108,13 +108,21 @@
 
 # Python
 
-1. Scopeing (global, local)
-2. Regex
-3. JSON
-4. Errors and Handle it (try, except, else, finally)
-5. How Modules work
-6. Libraries
-7. Files
-
+1. 
+2. Scopeing (global, local)
+3. Regex
+4. JSON
+5. Errors and Handle it (try, except, else, finally)
+6. How Modules work
+7. Libraries
+8. Files
+9. OOP-Intro
+10. Calss, Object
+11. OOP-concepts
+12. Encapsulation
+13. Inheiritance
+14. Polemorphism
+15. Abstraction
+16. Connect with Database (PostgreSQL) ❌
 
 ---
