@@ -26,7 +26,6 @@
                     <li class="nav-item">
                     <a class="nav-link" href="{% url 'customname' %}">Contact</a>
                     </li>
-
                 </ul>
                 </div>
             </div>
@@ -42,15 +41,15 @@
             <tr>
                 {% if user == 'Omnia' %}
                     <th class='fs-3' scope="col">{{user}}</th>
-                    <th style='color: red' scope="col">{{message}}</th>
+                    <th style='color: red' scope="col">{{mymessage}}</th>
                 {% else %}
                     <th scope="col">{{user}}</th>
-                    <th scope="col">{{message}}</th>
+                    <th scope="col">{{mymessage}}</th>
                 {% endif %}
             </tr>
             {% endfor %}
     </table>
-    <p>{{message}}</p>
+    <p>{{mymessage}}</p>
     <button class="btn btn-primary">Click</button>
     <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"

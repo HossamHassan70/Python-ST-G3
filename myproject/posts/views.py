@@ -19,4 +19,19 @@ def profileview(request):
     users = [
         'Omnia', 'Mostafa', 'Basmala', 'Mohamed'
     ]
-    return render(request, 'posts/index.html', context={'message':message, 'users': users})
+    return render(request, 'posts/index.html', context={'mymessage':message, '  ': users})
+
+our_posts = [
+    {'id': 1, 'title': 'Post1', 'description': 'This is the description for post1'},
+    {'id': 2, 'title': 'Post2', 'description': 'This is the description for post2'},
+    {'id': 3, 'title': 'Post3', 'description': 'This is the description for post3'},
+]
+def indexposts(request):
+    return render(request, 'posts/posts.html', context={'posts': our_posts})
+
+def showpost(request, id):
+    for post in our_posts:
+        if post['id'] == id:
+            return render(request, 'posts/show.html', context={'post': post})
+    else:
+        return HttpResponse('Post Not Found')
