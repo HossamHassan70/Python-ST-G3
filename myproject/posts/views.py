@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from .models import Post
 
 # Create your views here.
 def sayhello(request):
@@ -35,3 +36,13 @@ def showpost(request, id):
             return render(request, 'posts/show.html', context={'post': post})
     else:
         return HttpResponse('Post Not Found')
+
+def allposts(request):
+    post_list = Post.objects.all()
+    context = {'my_list': post_list}
+    return render(request, 'posts/allposts.html', context)
+
+def post_detail(request, id):
+    p_detail = Post.objects.get(id = id)
+    context = {'post_detail': p_detail}
+    return render(request, 'posts/post_detail.html', context)
